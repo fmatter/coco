@@ -31,7 +31,7 @@ class Cognateset(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
     @property
     def reflexes(self):
         res = []
-        for field in ["forms", "morphs", "stems", "wordforms"]:
+        for field in ["forms", "morphs", "stems"]:
             res.extend(getattr(self, field))
         return res
 
