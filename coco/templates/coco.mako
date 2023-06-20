@@ -1,4 +1,5 @@
 <%inherit file="app.mako"/>
+<link rel="stylesheet" href="${req.static_url('clld_document_plugin:static/clld-document.css')}"/>
 
 ##
 ## define app-level blocks:
@@ -11,13 +12,7 @@
 
 ${next.body()}
 
-<script src="http://127.0.0.1:6543/static/alignment.js"></script>
-<link rel="stylesheet" href="http://127.0.0.1:6543/static/alignment.css" type="text/css"/>
+<script src="${req.static_url('clld_document_plugin:static/clld-document.js')}"></script>
 <script>
-    $( document ).ready(function() {
-        var alignments = document.getElementsByClassName("alignment");
-        for (var i=0,alignment; alignment=alignments[i]; i++) {
-            alignment.innerHTML = plotWord(alignment.innerHTML, 'span');
-        }
-    });
+number_examples()
 </script>

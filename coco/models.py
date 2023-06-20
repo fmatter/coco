@@ -16,27 +16,30 @@ from clld import interfaces
 from clld.db.meta import Base, CustomModelMixin, PolymorphicBaseMixin
 from clld.db.models import common, IdNameDescriptionMixin
 from clld_morphology_plugin.models import Morph, Wordform, Form, Stem
-from coco.interfaces import ICognateset
+from coco.interfaces import ICognateset, IMorphCognate, IFormCognate, IStemCognate
 import sqlalchemy as sa
+from clld.db.models.common import Contribution
 
-#-----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
 # specialized common mapper classes
-#-----------------------------------------------------------------------------
-
+# -----------------------------------------------------------------------------
 
 
 @implementer(ICognateset)
 class Cognateset(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
-    meaning = sa.Column(sa.String)
     @property
     def reflexes(self):
         res = []
-        for field in ["forms"]:
-            print(getattr(self, field))
-            res.extend(self[field])
+        for field in ["forms", "morphs", "stems", "wordforms"]:
+            res.extend(getattr(self, field))
         return res
-    
 
+    contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
+    contribution = relationship(Contribution, backref="cognatesets")
+
+
+@implementer(IFormCognate)
 class FormCognate(Base):
     cognateset_pk = sa.Column(sa.Integer, sa.ForeignKey("cognateset.pk"))
     cognateset = sa.orm.relationship(Cognateset, backref="forms")
@@ -45,6 +48,11 @@ class FormCognate(Base):
     doubt = sa.Column(sa.Boolean, default=False)
     alignment = sa.Column(sa.Unicode)
 
+    contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
+    contribution = relationship(Contribution, backref="formcognates")
+
+
+@implementer(IMorphCognate)
 class MorphCognate(Base):
     cognateset_pk = sa.Column(sa.Integer, sa.ForeignKey("cognateset.pk"))
     cognateset = sa.orm.relationship(Cognateset, backref="morphs")
@@ -53,6 +61,11 @@ class MorphCognate(Base):
     doubt = sa.Column(sa.Boolean, default=False)
     alignment = sa.Column(sa.Unicode)
 
+    contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
+    contribution = relationship(Contribution, backref="morphcognates")
+
+
+@implementer(IStemCognate)
 class StemCognate(Base):
     cognateset_pk = sa.Column(sa.Integer, sa.ForeignKey("cognateset.pk"))
     cognateset = sa.orm.relationship(Cognateset, backref="stems")
@@ -60,3 +73,6 @@ class StemCognate(Base):
     counterpart = sa.orm.relationship(Stem, backref="cognates")
     doubt = sa.Column(sa.Boolean, default=False)
     alignment = sa.Column(sa.Unicode)
+
+    contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
+    contribution = relationship(Contribution, backref="stemcognates")

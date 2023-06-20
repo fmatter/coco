@@ -9,12 +9,8 @@ from clldutils.svg import pie, icon, data_url
 from coco import models, interfaces
 
 
-
-
-
 def main(global_config, **settings):
-    """ This function returns a Pyramid WSGI application.
-    """
+    """This function returns a Pyramid WSGI application."""
     # settings["clld_markdown_plugin"] = {
     #     "model_map": {
     #         TextTable["url"]: {
@@ -58,6 +54,26 @@ def main(global_config, **settings):
         with_detail=True,
     )
 
+    config.register_resource(
+        "morphcognate",
+        models.MorphCognate,
+        interfaces.IMorphCognate,
+        with_index=True,
+    )
+
+    config.register_resource(
+        "stemcognate",
+        models.StemCognate,
+        interfaces.IStemCognate,
+        with_index=True,
+    )
+
+    config.register_resource(
+        "formcognate",
+        models.FormCognate,
+        interfaces.IFormCognate,
+        with_index=True,
+    )
 
     # config.register_resource(
     #     "phoneme", models.Phoneme, interfaces.IPhoneme, with_index=True
