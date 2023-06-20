@@ -34,7 +34,7 @@ def main(args):
         publisher_place="",
         publisher_url="",
     )
-    
+
     def get_link(rec, field, datafield=None):
         if not datafield:
             datafield = field.replace("_ID", "")
@@ -44,7 +44,6 @@ def main(args):
             return data[datafield].get(rec[field])
         return None
 
-
     process_cldf(data, dataset, args.cldf)
     for cogset in args.cldf.iter_rows("CognatesetTable"):
         data.add(
@@ -52,7 +51,7 @@ def main(args):
             cogset["ID"],
             id=cogset["ID"],
             description=cogset["Description"],
-            contribution=get_link(cogset, "Contribution_ID")
+            contribution=get_link(cogset, "Contribution_ID"),
         )
 
     if "cognates.csv" in [str(x.url) for x in args.cldf.tables]:
@@ -64,7 +63,7 @@ def main(args):
                     counterpart=data["Form"][cog["Form_ID"]],
                     cognateset=data["Cognateset"][cog["Cognateset_ID"]],
                     alignment=" ".join(cog["Alignment"]),
-                    contribution=get_link(cog, "Contribution_ID")
+                    contribution=get_link(cog, "Contribution_ID"),
                 )
             if cog.get("Morph_ID"):
                 data.add(
@@ -73,7 +72,7 @@ def main(args):
                     counterpart=data["Morph"][cog["Morph_ID"]],
                     cognateset=data["Cognateset"][cog["Cognateset_ID"]],
                     alignment=" ".join(cog["Alignment"]),
-                    contribution=get_link(cog, "Contribution_ID")
+                    contribution=get_link(cog, "Contribution_ID"),
                 )
             if cog.get("Stem_ID"):
                 data.add(
@@ -82,7 +81,7 @@ def main(args):
                     counterpart=data["Stem"][cog["Stem_ID"]],
                     cognateset=data["Cognateset"][cog["Cognateset_ID"]],
                     alignment=" ".join(cog["Alignment"]),
-                    contribution=get_link(cog, "Contribution_ID")
+                    contribution=get_link(cog, "Contribution_ID"),
                 )
 
 

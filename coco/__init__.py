@@ -4,6 +4,7 @@ from pyramid.config import Configurator
 from clld.interfaces import IMapMarker, IValueSet, IValue, IDomainElement
 from clld.web.icon import MapMarker
 from clldutils.svg import pie, icon, data_url
+from coco.maps import CognatesetMap
 
 # we must make sure custom models are known at database initialization!
 from coco import models, interfaces
@@ -75,6 +76,7 @@ def main(global_config, **settings):
         with_index=True,
     )
 
+    config.register_map("cognateset", CognatesetMap)
     # config.register_resource(
     #     "phoneme", models.Phoneme, interfaces.IPhoneme, with_index=True
     # )

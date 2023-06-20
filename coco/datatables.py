@@ -25,6 +25,11 @@ class MorphCognates(DataTable):
                 # model_col=models.Morph.name,
                 get_obj=lambda i: i.counterpart,
             ),
+            LinkCol(
+                self,
+                "language",
+                get_obj=lambda i: i.counterpart.language,
+            ),
             Col(
                 self,
                 "description",
@@ -43,6 +48,11 @@ class StemCognates(DataTable):
                 # model_col=models.Stem.name,
                 get_obj=lambda i: i.counterpart,
             ),
+            LinkCol(
+                self,
+                "language",
+                get_obj=lambda i: i.counterpart.language,
+            ),
             Col(
                 self,
                 "description",
@@ -58,8 +68,13 @@ class FormCognates(DataTable):
             LinkCol(
                 self,
                 "counterpart",
-                # model_col=models.Form.name,
                 get_obj=lambda i: i.counterpart,
+            ),
+            LinkCol(
+                self,
+                "language",
+                # model_col=models.Morph.name,
+                get_obj=lambda i: i.counterpart.language,
             ),
             Col(
                 self,

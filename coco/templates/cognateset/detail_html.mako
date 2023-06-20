@@ -32,3 +32,7 @@
         }
     });
 </script>
+
+% if request.map:
+    ${request.map.render()}
+% endif
