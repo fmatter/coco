@@ -3,7 +3,7 @@
 <%! active_menu_item = "cognatesets" %>
 
 
-<h3>${_('Cognate set')}</h3>
+<h3>${_('Cognate set')} ${ctx.description}</h3>
 
 % if ctx.contribution:
     From contribution: ${h.link(request, ctx.contribution)}
