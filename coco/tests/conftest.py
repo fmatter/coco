@@ -1,2 +1,3 @@
-from coco import models
 import pytest
+
+from coco import models

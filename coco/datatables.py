@@ -1,8 +1,7 @@
-from sqlalchemy.orm import joinedload
 from clld.web import datatables
-from clld.web.datatables.base import LinkCol, Col, LinkToMapCol
-from clld.web.datatables.base import DataTable
+from clld.web.datatables.base import Col, DataTable, LinkCol, LinkToMapCol
 from clld_morphology_plugin import models
+from sqlalchemy.orm import joinedload
 
 from coco import models
 

@@ -1,13 +1,13 @@
 import collections
 
-from pyramid.config import Configurator
-from clld.interfaces import IMapMarker, IValueSet, IValue, IDomainElement
+from clld.interfaces import IDomainElement, IMapMarker, IValue, IValueSet
 from clld.web.icon import MapMarker
-from clldutils.svg import pie, icon, data_url
-from coco.maps import CognatesetMap
+from clldutils.svg import data_url, icon, pie
+from pyramid.config import Configurator
 
 # we must make sure custom models are known at database initialization!
-from coco import models, interfaces
+from coco import interfaces, models
+from coco.maps import CognatesetMap
 
 
 def main(global_config, **settings):

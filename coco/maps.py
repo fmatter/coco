@@ -1,8 +1,8 @@
-from clld.web.maps import Map, Layer, GeoJsonSelectedLanguages
-from clld.web.util import helpers
-from clld.web.adapters.geojson import GeoJson, get_lonlat, get_feature
-from pyramid.renderers import render as pyramid_render
 from clld import interfaces
+from clld.web.adapters.geojson import GeoJson, get_feature, get_lonlat
+from clld.web.maps import GeoJsonSelectedLanguages, Layer, Map
+from clld.web.util import helpers
+from pyramid.renderers import render as pyramid_render
 
 
 class GeoJsonCognates(GeoJson):
