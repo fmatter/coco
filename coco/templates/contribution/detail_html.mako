@@ -1,7 +1,5 @@
 <%inherit file="../${context.get('request').registry.settings.get('clld.app_template', 'app.mako')}"/>
 <%namespace name="util" file="../util.mako"/>
-<% from clld_morphology_plugin import models %>
-<% from clld.db.models import common %>
 
 <%! active_menu_item = "contributions" %>
 <%block name="title">${_('Contribution')} '${ctx.name}'</%block>

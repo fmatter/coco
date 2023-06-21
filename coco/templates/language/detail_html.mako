@@ -1,6 +1,7 @@
 <%inherit file="../${context.get('request').registry.settings.get('clld.app_template', 'app.mako')}"/>
 <%namespace name="util" file="../util.mako"/>
 <% from clld_morphology_plugin import models %>
+<% from clld_corpus_plugin import models as corpus %>
 <% from clld.db.models import common %>
 
 <%! active_menu_item = "languages" %>
@@ -42,7 +43,7 @@
         </div>
 
         <div id="sentences" class="tab-pane">
-            ${request.get_datatable('sentences', common.Sentence,language=ctx).render()}
+            ${request.get_datatable('sentences', corpus.Record,language=ctx).render()}
         </div>
 
     </div>

@@ -1,6 +1,6 @@
 <%namespace name="util" file="../util.mako"/>
 <% from clld_morphology_plugin import models %>
-<% from clld.db.models import common %>
+<% from clld_corpus_plugin import models as corpus %>
 
 <div class="tabbable">
 
@@ -16,7 +16,7 @@
         </div>
 
         <div id="sentences" class="tab-pane">
-            ${request.get_datatable('sentences', common.Sentence,contribution=ctx).render()}
+            ${request.get_datatable('sentences', corpus.Record,contribution=ctx).render()}
         </div>
 
     </div>

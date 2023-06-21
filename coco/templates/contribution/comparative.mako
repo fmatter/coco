@@ -1,7 +1,5 @@
 <%namespace name="util" file="../util.mako"/>
-<% from clld_morphology_plugin import models %>
 <% from coco.models import Cognateset, FormCognate, MorphCognate, StemCognate %>
-<% from clld.db.models import common %>
 
 <div class="tabbable">
 
