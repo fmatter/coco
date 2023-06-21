@@ -2,8 +2,6 @@ import collections
 import itertools
 from pathlib import Path
 
-import karipona
-import pandas as pd
 from clld.cliutil import Data, bibtex2source
 from clld.db.meta import DBSession
 from clld.db.models import common
@@ -11,7 +9,6 @@ from clld.lib import bibtex
 from clldutils.color import qualitative_colors
 from clldutils.misc import nfilter
 from indicogram.scripts.initializedb import process_cldf, get_license_data
-from karipona.transliterate import ipaify
 from pycldf import Dataset
 from tqdm import tqdm
 

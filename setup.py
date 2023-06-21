@@ -19,6 +19,10 @@ setup(
     zip_safe=False,
     install_requires=[
         "clld",
+        "clld_document_plugin",
+        "clld_markdown_plugin",
+        "clld_morphology_plugin",
+        "clld_corpus_plugin",
     ],
     extras_require={
         "dev": ["flake8", "waitress"],
