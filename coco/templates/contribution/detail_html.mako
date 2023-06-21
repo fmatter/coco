@@ -8,8 +8,7 @@
 
 <h2>${_('Contribution')} '${ctx.name}'</h2>
 
-By:
-<ul>
+By <ul class="taglist">
 % for ctb in ctx.contributor_assocs:
     <li>${h.link(request, ctb.contributor)}</li>
 % endfor

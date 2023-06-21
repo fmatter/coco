@@ -9,11 +9,8 @@
     </div>
 </%def>
 
-<h2>Welcome to coco</h2>
+<h2>${ctx.name}</h2>
 
 <p class="lead">
     Abstract.
-</p>
-<p>
-    More content.
 </p>

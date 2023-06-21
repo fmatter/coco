@@ -1,13 +1,6 @@
-from clld.web import datatables
-from clld.web.datatables.base import Col, DataTable, LinkCol, LinkToMapCol
+from clld.web.datatables.base import Col, DataTable, LinkCol
 from clld_morphology_plugin import models
-from sqlalchemy.orm import joinedload
-
 from coco import models
-
-
-def includeme(config):
-    """register custom datatables"""
 
 
 class Cognatesets(DataTable):
@@ -82,7 +75,6 @@ class FormCognates(DataTable):
                 get_obj=lambda i: i.counterpart,
             ),
         ]
-
 
 def includeme(config):
     config.register_datatable("cognatesets", Cognatesets)

@@ -1,1 +1,22 @@
+.taglist {
+  display: inline;
+  list-style: none;
+  margin-left: 0;
+}
+
+.taglist li {
+  display: inline;
+}
+
+.taglist li:after {
+  content: ", ";
+}
+
+.taglist li:last-child:after {
+  content: "";
+}
+
+.taglist li:nth-last-child(2):after {
+  content: " and ";
+}
 
