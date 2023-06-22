@@ -23,7 +23,8 @@ setup(
         "clld_markdown_plugin",
         "clld_morphology_plugin",
         "clld_corpus_plugin",
-        "tqdm"
+        "tqdm",
+        "waitress"
     ],
     extras_require={
         "dev": ["flake8", "waitress"],
