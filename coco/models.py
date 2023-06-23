@@ -1,7 +1,7 @@
 import sqlalchemy as sa
 from clld import interfaces
 from clld.db.meta import Base, CustomModelMixin, PolymorphicBaseMixin
-from clld.db.models import IdNameDescriptionMixin, common
+from clld.db.models import IdNameDescriptionMixin, common, HasSourceMixin
 from clld.db.models.common import Contribution
 from clld_morphology_plugin.models import Form, Morph, Stem, Wordform
 from sqlalchemy import (Boolean, Column, ForeignKey, Integer, String, Unicode,
@@ -20,7 +20,7 @@ from coco.interfaces import (ICognateset, IFormCognate, IMorphCognate,
 
 
 @implementer(ICognateset)
-class Cognateset(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
+class Cognateset(Base, PolymorphicBaseMixin, IdNameDescriptionMixin, HasSourceMixin):
     @property
     def reflexes(self):
         res = []

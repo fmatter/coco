@@ -11,6 +11,8 @@ from clldutils.misc import nfilter
 from indicogram.scripts.initializedb import process_cldf, get_license_data
 from pycldf import Dataset
 from tqdm import tqdm
+from pycldf import Sources
+
 
 import coco
 from coco import models
@@ -41,14 +43,21 @@ def main(args):
             return data[datafield].get(rec[field])
         return None
 
+    def get_source(entity):
+        if entity["Source"]:
+            bibkey, pages = Sources.parse(entity["Source"][0])
+            return data["Source"][bibkey]
+        return None
+
     process_cldf(data, dataset, args.cldf)
     for cogset in args.cldf.iter_rows("CognatesetTable"):
-        data.add(
+        new_cogset = data.add(
             models.Cognateset,
             cogset["ID"],
             id=cogset["ID"],
             description=cogset["Description"],
             contribution=get_link(cogset, "Contribution_ID"),
+            source=get_source(cogset)
         )
 
     if "cognates.csv" in [str(x.url) for x in args.cldf.tables]:

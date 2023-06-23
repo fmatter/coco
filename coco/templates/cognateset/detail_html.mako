@@ -5,9 +5,28 @@
 
 <h3>${_('Cognate set')} ${ctx.description}</h3>
 
-% if ctx.contribution:
-    From contribution: ${h.link(request, ctx.contribution)}
-% endif
+<table class="table table-nonfluid">
+    <tbody>
+        % if ctx.contribution:
+            <tr>
+                <td>Contribution:</td>
+                <td>${h.link(request, ctx.contribution)}</td>
+            </tr>
+        % endif
+        % if ctx.source:
+            <tr>
+                <td> Source:</td>
+                <td>${h.link(request, ctx.source)}</td>
+            </tr>
+        % endif
+        ## % if ctx.description:
+        ##     <tr>
+        ##         <td> Description:</td>
+        ##         <td>${ctx.description}</td>
+        ##     </tr>
+        ## % endif
+   </tbody>
+</table>
 
 <%util:table items="${ctx.reflexes}" args="item" options="${dict(bInfo=True)}">
     <%def name="head()">
