@@ -42,5 +42,5 @@ class CognatesetMap(Map):
             "resize_direction": "s",
             "info_query": {"parameter": self.ctx.pk},
             "hash": True,
-            "zoom": 4
+            "zoom": 4,
         }

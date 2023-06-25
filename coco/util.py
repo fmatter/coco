@@ -1,12 +1,13 @@
-from clld.web.util.htmllib import HTML
-from Bio import Phylo
 import copy
-from clld.web.util.helpers import link
-from clld.db.meta import DBSession
-from clld.db.models.common import Language, Parameter, Value
-from coco import models
 from io import StringIO
 
+from Bio import Phylo
+from clld.db.meta import DBSession
+from clld.db.models.common import Language, Parameter, Value
+from clld.web.util.helpers import link
+from clld.web.util.htmllib import HTML
+
+from coco import models
 
 
 def iter_tree(clade):
@@ -47,13 +48,11 @@ def build_ul(request, coghits, clade):
                 )
             )
         else:
-            print(child.name)
             lg = list(DBSession.query(Language).filter(Language.id == child.name))
-            print(lg)
             if len(lg) > 0:
                 lis.append(HTML.li(link(request, lg[0]), ": ?", class_="tree"))
             else:
-                lis.append(HTML.li(child.name, ": ?", class_="tree"))                
+                lis.append(HTML.li(child.name, ": ?", class_="tree"))
         if not child.is_terminal():
             lis.append(build_ul(request, coghits, child))
     return HTML.ul(*lis, class_="tree")
@@ -64,9 +63,9 @@ def build_tree(request, cogset):
     if len(trees) > 0:
         ref_tree = trees[0]
         tree = Phylo.read(
-    StringIO(ref_tree.newick),
-    format="newick",
-)
+            StringIO(ref_tree.newick),
+            format="newick",
+        )
 
         coghits = {x.counterpart.language.id: x for x in cogset.reflexes}
         good_leafs = []

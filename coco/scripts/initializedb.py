@@ -8,11 +8,9 @@ from clld.db.models import common
 from clld.lib import bibtex
 from clldutils.color import qualitative_colors
 from clldutils.misc import nfilter
-from indicogram.scripts.initializedb import process_cldf, get_license_data
-from pycldf import Dataset
+from indicogram.scripts.initializedb import get_license_data, process_cldf
+from pycldf import Dataset, Sources
 from tqdm import tqdm
-from pycldf import Sources
-
 
 import coco
 from coco import models
@@ -101,7 +99,7 @@ def main(args):
             models.Tree,
             tree["ID"],
             id=tree["ID"],
-            newick=media[tree["Media_ID"]]["Download_URL"].path.split(",",1)[1]
+            newick=media[tree["Media_ID"]]["Download_URL"].path.split(",", 1)[1],
         )
 
 

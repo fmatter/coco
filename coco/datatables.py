@@ -1,5 +1,6 @@
 from clld.web.datatables.base import Col, DataTable, LinkCol
 from clld_morphology_plugin import models
+
 from coco import models
 
 

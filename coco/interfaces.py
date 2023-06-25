@@ -24,6 +24,7 @@ class IFormCognate(Interface):
     marker interface
     """
 
+
 class ITree(Interface):
     """
     marker interface
