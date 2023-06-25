@@ -25,6 +25,7 @@ setup(
         "clld_corpus_plugin",
         "tqdm",
         "waitress"
+        "biopython"
     ],
     extras_require={
         "dev": ["flake8", "waitress"],
