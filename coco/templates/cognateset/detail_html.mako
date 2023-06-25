@@ -62,8 +62,8 @@
 </%util:table>
 
 
-<script src="http://127.0.0.1:6543/static/alignment.js"></script>
-<link rel="stylesheet" href="http://127.0.0.1:6543/static/alignment.css" type="text/css"/>
+<script src="${req.static_url('coco:static/alignment.js')}"></script>
+<link rel="stylesheet" href="${req.static_url('coco:static/alignment.css')}" type="text/css"/>
 <script>
     $( document ).ready(function() {
         var alignments = document.getElementsByClassName("alignment");
