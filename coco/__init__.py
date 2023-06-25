@@ -49,5 +49,4 @@ def main(global_config, **settings):
     )
 
     config.register_map("cognateset", CognatesetMap)
-
     return config.make_wsgi_app()

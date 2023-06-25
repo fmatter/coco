@@ -4,11 +4,9 @@ import copy
 from clld.web.util.helpers import link
 from clld.db.meta import DBSession
 from clld.db.models.common import Language, Parameter, Value
+from coco import models
+from io import StringIO
 
-tree = Phylo.read(
-    "/home/florianm/Dropbox/research/cariban/cariban_meta/data/tree.nwk",
-    format="newick",
-)
 
 
 def iter_tree(clade):
@@ -39,7 +37,7 @@ def build_ul(request, coghits, clade):
     for child in clade.clades:
         if child == clade:
             continue
-        if child.is_terminal():
+        if child.name in coghits:
             lis.append(
                 HTML.li(
                     link(request, coghits[child.name].counterpart.language),
@@ -49,16 +47,32 @@ def build_ul(request, coghits, clade):
                 )
             )
         else:
-            lis.append(HTML.li(child.name, class_="tree"))
+            print(child.name)
+            lg = list(DBSession.query(Language).filter(Language.id == child.name))
+            print(lg)
+            if len(lg) > 0:
+                lis.append(HTML.li(link(request, lg[0]), ": ?", class_="tree"))
+            else:
+                lis.append(HTML.li(child.name, ": ?", class_="tree"))                
+        if not child.is_terminal():
             lis.append(build_ul(request, coghits, child))
     return HTML.ul(*lis, class_="tree")
 
 
 def build_tree(request, cogset):
-    coghits = {x.counterpart.language.id: x for x in cogset.reflexes}
-    good_leafs = []
-    for name, isleaf in iter_tree(tree.root):
-        if name in coghits:
-            good_leafs.append(name)
-    new_tree = filtered_tree(tree, good_leafs)
-    return build_ul(request, coghits, new_tree.root)
+    trees = list(DBSession.query(models.Tree))
+    if len(trees) > 0:
+        ref_tree = trees[0]
+        tree = Phylo.read(
+    StringIO(ref_tree.newick),
+    format="newick",
+)
+
+        coghits = {x.counterpart.language.id: x for x in cogset.reflexes}
+        good_leafs = []
+        for name, isleaf in iter_tree(tree.root):
+            if name in coghits:
+                good_leafs.append(name)
+        new_tree = filtered_tree(tree, good_leafs)
+        return build_ul(request, coghits, new_tree.root)
+    return HTML.div("No trees in database.")

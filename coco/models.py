@@ -18,7 +18,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import backref, relationship
 from zope.interface import implementer
 
-from coco.interfaces import ICognateset, IFormCognate, IMorphCognate, IStemCognate
+from coco.interfaces import ICognateset, IFormCognate, IMorphCognate, IStemCognate, ITree
 
 # -----------------------------------------------------------------------------
 # specialized common mapper classes
@@ -75,3 +75,8 @@ class StemCognate(Base):
 
     contribution_pk = Column(Integer, ForeignKey("contribution.pk"))
     contribution = relationship(Contribution, backref="stemcognates")
+
+
+@implementer(ITree)
+class Tree(Base, PolymorphicBaseMixin, IdNameDescriptionMixin):
+    newick = Column(Unicode)

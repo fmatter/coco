@@ -6,7 +6,11 @@
 
 <%def name="sidebar()">
     <%util:well title="${_('Overview')}">
-        ${ build_tree(request, ctx)|n}
+
+        % if request.map:
+    ${request.map.render()}
+% endif
+
     </%util:well>
 </%def>
 
@@ -33,8 +37,14 @@
         ##         <td>${ctx.description}</td>
         ##     </tr>
         ## % endif
+        <tr>
+            <td> Overview:</td>
+            <td>${ build_tree(request, ctx)|n}</td>
+        </tr>
    </tbody>
 </table>
+
+
 
 <h4>${_('Aligned cognates')}</h3>
 
@@ -63,10 +73,7 @@
     });
 </script>
 
-                        <div style="position: absolute; width: 100%; left: 0;">
+## <div style="position: absolute; width: 100%; left: 0;">
 
-% if request.map:
-    ${request.map.render()}
-% endif
 
-</div>
+## </div>

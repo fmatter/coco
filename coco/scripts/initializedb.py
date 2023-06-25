@@ -92,6 +92,18 @@ def main(args):
                     contribution=get_link(cog, "Contribution_ID"),
                 )
 
+    media = {}
+    for med in args.cldf.iter_rows("MediaTable"):
+        media[med["ID"]] = med
+
+    for tree in args.cldf.iter_rows("TreeTable"):
+        data.add(
+            models.Tree,
+            tree["ID"],
+            id=tree["ID"],
+            newick=media[tree["Media_ID"]]["Download_URL"].path.split(",",1)[1]
+        )
+
 
 def prime_cache(args):
     """If data needs to be denormalized for lookup, do that here.
