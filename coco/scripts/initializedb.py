@@ -27,11 +27,13 @@ def main(args):
         name=args.cldf.properties.get("dc:title", None),
         domain=args.cldf.properties.get("dc:url", None),
         license=args.cldf.properties.get("dc:license", None),
-        jsondata=get_license_data(args.cldf.properties.get("dc:license", None), small=False),
+        jsondata=get_license_data(
+            args.cldf.properties.get("dc:license", None), small=False
+        ),
         publisher_name="",
         publisher_place="",
         publisher_url="",
-        description=args.cldf.properties.get("dc:title", "")
+        description=args.cldf.properties.get("dc:title", ""),
     )
 
     def get_link(rec, field, datafield=None):
@@ -57,7 +59,7 @@ def main(args):
             id=cogset["ID"],
             description=cogset["Description"],
             contribution=get_link(cogset, "Contribution_ID"),
-            source=get_source(cogset)
+            source=get_source(cogset),
         )
 
     if "cognates.csv" in [str(x.url) for x in args.cldf.tables]:

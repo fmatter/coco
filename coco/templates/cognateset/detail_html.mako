@@ -1,6 +1,14 @@
 <%inherit file="../${context.get('request').registry.settings.get('clld.app_template', 'app.mako')}"/>
 <%namespace name="util" file="../util.mako"/>
+
+<%! from coco.util import build_tree %>
 <%! active_menu_item = "cognatesets" %>
+
+<%def name="sidebar()">
+    <%util:well title="${_('Overview')}">
+        ${ build_tree(request, ctx)|n}
+    </%util:well>
+</%def>
 
 
 <h3>${_('Cognate set')} ${ctx.description}</h3>
@@ -28,6 +36,8 @@
    </tbody>
 </table>
 
+<h4>${_('Aligned cognates')}</h3>
+
 <%util:table items="${ctx.reflexes}" args="item" options="${dict(bInfo=True)}">
     <%def name="head()">
         <th>Form</th>
@@ -41,6 +51,7 @@
     </td>
 </%util:table>
 
+
 <script src="http://127.0.0.1:6543/static/alignment.js"></script>
 <link rel="stylesheet" href="http://127.0.0.1:6543/static/alignment.css" type="text/css"/>
 <script>
@@ -52,6 +63,10 @@
     });
 </script>
 
+                        <div style="position: absolute; width: 100%; left: 0;">
+
 % if request.map:
     ${request.map.render()}
 % endif
+
+</div>

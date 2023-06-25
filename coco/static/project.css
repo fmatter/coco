@@ -20,3 +20,24 @@
   content: " and ";
 }
 
+
+
+li.tree::before {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: #666;
+    top: 11px;
+    width: 30px;
+    left: -17px;
+}
+
+ul.tree.child::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background: #666;
+    top: -9px;
+    bottom: 10px;
+    left: -14px;
+}

@@ -76,6 +76,7 @@ class FormCognates(DataTable):
             ),
         ]
 
+
 def includeme(config):
     config.register_datatable("cognatesets", Cognatesets)
     config.register_datatable("morphcognates", MorphCognates)
