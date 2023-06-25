@@ -24,7 +24,7 @@ setup(
         "clld_morphology_plugin",
         "clld_corpus_plugin",
         "tqdm",
-        "waitress"
+        "waitress",
         "biopython"
     ],
     extras_require={
