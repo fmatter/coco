@@ -7,6 +7,12 @@ class ICognateset(Interface):
     """
 
 
+class IComplexCognateset(Interface):
+    """
+    marker interface
+    """
+
+
 class IMorphCognate(Interface):
     """
     marker interface
@@ -26,6 +32,18 @@ class IFormCognate(Interface):
 
 
 class ITree(Interface):
+    """
+    marker interface
+    """
+
+
+class IComplexMorphCognate(Interface):
+    """
+    marker interface
+    """
+
+
+class IComplexFormCognate(Interface):
     """
     marker interface
     """

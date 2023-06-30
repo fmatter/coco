@@ -44,8 +44,6 @@
    </tbody>
 </table>
 
-
-
 <h4>${_('Aligned cognates')}</h3>
 
 <%util:table items="${ctx.reflexes}" args="item" options="${dict(bInfo=True)}">
@@ -60,7 +58,6 @@
         <span class="alignment">${item.alignment}</span>
     </td>
 </%util:table>
-
 
 <script src="${req.static_url('coco:static/alignment.js')}"></script>
 <link rel="stylesheet" href="${req.static_url('coco:static/alignment.css')}" type="text/css"/>

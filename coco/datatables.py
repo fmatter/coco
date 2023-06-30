@@ -9,6 +9,11 @@ class Cognatesets(DataTable):
         return [LinkCol(self, "name"), Col(self, "description")]
 
 
+class ComplexCognatesets(DataTable):
+    def col_defs(self):
+        return [LinkCol(self, "name"), Col(self, "description")]
+
+
 class MorphCognates(DataTable):
     def col_defs(self):
         return [
@@ -83,3 +88,4 @@ def includeme(config):
     config.register_datatable("morphcognates", MorphCognates)
     config.register_datatable("stemcognates", StemCognates)
     config.register_datatable("formcognates", FormCognates)
+    config.register_datatable("complexcognatesets", ComplexCognatesets)

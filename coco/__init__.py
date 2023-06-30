@@ -28,6 +28,14 @@ def main(global_config, **settings):
     )
 
     config.register_resource(
+        "complexcognateset",
+        models.ComplexCognateset,
+        interfaces.IComplexCognateset,
+        with_index=True,
+        with_detail=True,
+    )
+
+    config.register_resource(
         "morphcognate",
         models.MorphCognate,
         interfaces.IMorphCognate,
@@ -49,4 +57,5 @@ def main(global_config, **settings):
     )
 
     config.register_map("cognateset", CognatesetMap)
+    config.register_map("complexcognateset", CognatesetMap)
     return config.make_wsgi_app()

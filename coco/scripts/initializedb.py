@@ -80,15 +80,44 @@ def main(args):
                     alignment=" ".join(cog["Alignment"]),
                     contribution=get_link(cog, "Contribution_ID"),
                 )
-            if cog.get("Stem_ID"):
-                data.add(
-                    models.StemCognate,
-                    cog["ID"],
-                    counterpart=data["Stem"][cog["Stem_ID"]],
-                    cognateset=data["Cognateset"][cog["Cognateset_ID"]],
-                    alignment=" ".join(cog["Alignment"]),
-                    contribution=get_link(cog, "Contribution_ID"),
-                )
+
+    if "complexcognatesets.csv" in [str(x.url) for x in args.cldf.tables]:
+        for cogset in args.cldf.iter_rows("complexcognatesets.csv"):
+            data.add(
+                models.ComplexCognateset,
+                cogset["ID"],
+                id=cogset["ID"],
+                description=cogset["Description"],
+            )
+
+    cpx_dic = {"Stem_ID": models.StemCognate, "Morph_ID": models.ComplexMorphCognate, "Form_ID": models.ComplexFormCognate}
+    if "complexcognates.csv" in [str(x.url) for x in args.cldf.tables]:
+        for cog in args.cldf.iter_rows("complexcognates.csv"):
+            for key, model in cpx_dic.items():
+                if cog[key]:
+                    data.add(
+                        model,
+                        cog["ID"],
+                        counterpart=get_link(cog, key),
+                        cognateset=data["ComplexCognateset"][cog["Cognateset_ID"]],
+                        alignment=" ".join(cog["Alignment"]),
+                    )
+            # if cog["Morph_ID"]:
+            #     data.add(
+            #         models.ComplexMorphCognate,
+            #         cog["ID"],
+            #         counterpart=data["Morph"][cog["Morph_ID"]],
+            #         cognateset=data["ComplexCognateset"][cog["Cognateset_ID"]],
+            #         alignment=" ".join(cog["Alignment"]),
+            #     )
+            # if cog["Form_ID"]:
+            #     data.add(
+            #         models.ComplexFormCognate,
+            #         cog["ID"],
+            #         counterpart=data["Form"][cog["Form_ID"]],
+            #         cognateset=data["ComplexCognateset"][cog["Cognateset_ID"]],
+            #         alignment=" ".join(cog["Alignment"]),
+            #     )
 
     media = {}
     for med in args.cldf.iter_rows("MediaTable"):

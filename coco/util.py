@@ -21,14 +21,19 @@ def iter_tree(clade):
 
 
 def filtered_tree(tree, data):
+    print(data)
     new_tree = copy.deepcopy(tree)
     internals = [x.name for x in new_tree.get_nonterminals()]
     for item in new_tree.get_terminals():
         if item.name not in data:
-            # print("pruning", item.name)
-            new_tree.prune(item)
+            print("pruning", item.name, "because not in data")
+            try:
+                new_tree.prune(item)
+            except ValueError:
+                return None
     for item in new_tree.get_terminals():
         if not item.clades and item.name in internals:
+            print("pruning", item, "because no children")
             new_tree.prune(item)
     return new_tree
 
@@ -72,6 +77,9 @@ def build_tree(request, cogset):
         for name, isleaf in iter_tree(tree.root):
             if name in coghits:
                 good_leafs.append(name)
+        new_tree = tree
         new_tree = filtered_tree(tree, good_leafs)
-        return build_ul(request, coghits, new_tree.root)
+        if new_tree:
+            return build_ul(request, coghits, new_tree.root)
+        return ""
     return HTML.div("No trees in database.")
